@@ -1,0 +1,26 @@
+#! /bin/sh
+# /etc/init.d/carhudgui-test
+
+case "$1" in
+  start)
+    echo "Starting CarHUD Test GUI"
+    python /usr/bin/carhud_gui_test.py &
+    ;;
+  stop)
+    echo "Stopping CarHUD Test GUI"
+    killall `cat /tmp/carhud_gui_test.pid`
+    rm /tmp/carhud_gui_test.pid
+    ;;
+  restart)
+    echo "Restarting CarHUD Test GUI"
+    killall `cat /tmp/carhud_gui_test.pid`
+    rm /tmp/carhud_gui_test.pid
+    python /usr/bin/carhud_gui_test.py &
+    ;;
+  *)
+    echo "Usage: /etc/init.d/carhudgui-test{start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,27 @@
+#! /bin/sh
+# /etc/init.d/carhudgui7seg-test
+# defaults 96
+
+case "$1" in
+  start)
+    echo "Starting CarHUD 7 Segment GUI"
+    python /usr/bin/carhud_dual7seg_test.py &
+    ;;
+  stop)
+    echo "Stopping CarHUD 7 Segment GUI"
+    killall `cat /tmp/carhud_dual7seg.pid`
+    rm /tmp/carhud_dual7seg.pid
+    ;;
+  restart)
+    echo "Restarting CarHUD 7 Segment GUI"
+    killall `cat /tmp/carhud_dual7seg.pid`
+    rm /tmp/carhud_dual7seg.pid
+    python /usr/bin/carhud_dual7seg_test.py &
+    ;;
+  *)
+    echo "Usage: /etc/init.d/carhud7seg-test{start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0
