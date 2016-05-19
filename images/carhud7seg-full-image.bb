@@ -5,8 +5,7 @@ LICENSE = "MIT"
 # REMOVE MACHINE FEATURES
 MACHINE_FEATURES_remove = "touchscreen alsa bluetooth wifi"
 
-IMAGE_FEATURES += "package-management splash"
-# read-only-rootfs"
+IMAGE_FEATURES += "package-management splash read-only-rootfs"
 IMAGE_LINGUAS = "en-us"
 
 inherit core-image
