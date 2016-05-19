@@ -18,7 +18,8 @@ do_deploy_append() {
     echo "" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
     echo "CarHUD Specifics" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
     echo "dtparam=i2c_arm=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+    echo "dtparam=i2c1=on" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt 
     echo "dtparam=12c_arm_baudrate=100000" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
-    echo "dtoverlay=i2c-gpio-overlay.dtb" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
+    #echo "dtoverlay=i2c-gpio-overlay.dtb" >> ${DEPLOYDIR}/bcm2835-bootfiles/config.txt
 
 }

@@ -129,8 +129,6 @@ CARHUD_NEEDS += "carhudgui7seg-startup-init carhudgui7seg-init"
 
 IMAGE_INSTALL += " \
     ${CORE_OS} \
-    ${DEV_SDK_INSTALL} \
-    ${DEV_EXTRAS} \
     ${EXTRA_TOOLS_INSTALL} \
     ${CARHUD_PYTHON} \
     ${CARHUD_NEEDS} \
@@ -139,6 +137,9 @@ IMAGE_INSTALL += " \
 
 # SET THE SPLASH TO THE CARHUD ONE
 SPLASH = "psplash-carhud"
+
+# BLANK OUT THE SERIAL CONSOLE
+SERIAL_CONSOLE = ""
 
 set_local_timezone() {
     ln -sf /usr/share/zoneinfo/CST5CDT ${IMAGE_ROOTFS}/etc/localtime

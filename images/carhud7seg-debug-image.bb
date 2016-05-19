@@ -138,6 +138,9 @@ IMAGE_INSTALL += " \
 # SET THE SPLASH TO THE CARHUD ONE
 SPLASH = "psplash-carhud"
 
+# BLANK OUT THE SERIAL CONSOLE
+SERIAL_CONSOLE = ""
+
 set_local_timezone() {
     ln -sf /usr/share/zoneinfo/CST5CDT ${IMAGE_ROOTFS}/etc/localtime
 }
