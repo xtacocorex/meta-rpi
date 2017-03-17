@@ -42,17 +42,19 @@ CARHUD_PYTHON += "libpython2 \
 CARHUD_NEEDS = "adafruit-python-gpio \
                 adafruit-python-ledbackpack \
                 python-pyserial \
-#                gpsd \
-#                libgps \
-#                python-pygps \
-#                gpsd-conf \
-#                gpsd-udev \
-#                gpsd-gpsctl \ 
-#                gps-utils \
                 pyelm327 \
                 pycarhud \
                 carhud-extras \
                 carhud-config"
+
+# GPS NEEDED ITEMS
+GPS_NEEDS = "gpsd \
+             libgps \
+             python-pygps \
+             gpsd-conf \
+             gpsd-udev \
+             gpsd-gpsctl \ 
+             gps-utils"
 
 # PYGAME + SDL FOR LCD PROJECTOR HUD
 #CARHUD_GFX_NEEDS += "python-pygame"
