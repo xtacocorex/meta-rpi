@@ -42,13 +42,13 @@ CARHUD_PYTHON += "libpython2 \
 CARHUD_NEEDS = "adafruit-python-gpio \
                 adafruit-python-ledbackpack \
                 python-pyserial \
-                gpsd \
-                libgps \
-                python-pygps \
-                gpsd-conf \
-                gpsd-udev \
-                gpsd-gpsctl \ 
-                gps-utils \
+#                gpsd \
+#                libgps \
+#                python-pygps \
+#                gpsd-conf \
+#                gpsd-udev \
+#                gpsd-gpsctl \ 
+#                gps-utils \
                 pyelm327 \
                 pycarhud \
                 carhud-extras \
@@ -75,7 +75,7 @@ IMAGE_INSTALL += " \
  "
 
 # SET THE SPLASH TO THE CARHUD ONE
-SPLASH = "psplash-carhud"
+#SPLASH = "psplash-carhud"
 
 # BLANK OUT THE SERIAL CONSOLE
 SERIAL_CONSOLE = ""
