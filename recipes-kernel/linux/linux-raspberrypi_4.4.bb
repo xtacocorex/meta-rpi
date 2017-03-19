@@ -2,9 +2,7 @@ LINUX_VERSION = "4.4.8"
 
 SRCREV = "f6f3129ad7b49499004510b6a252f222c029efcb"
 #SRC_URI = "git://github.com/raspberrypi/linux.git;protocol=git;branch=rpi-4.4.y"
-SRC_URI = "https://github.com/raspberrypi/linux/archive/${SRCREV}.zip"
-SRC_URI[md5sum] = "b9ca7e56d21466b6db1804800ee3cb95"
-SRC_URI[sha256sum] = "33ba513d0764d2a4a4da1d408ee1c61a6dccfb24d9cd4a2e5ca8ae2a0ff6aea6"
+SRC_URI = "git://github.com:xtacocorex/rpi_kernel_for_carhud_yocto.git;protocol=git;branch=master"
 
 PR = "r13"
 
