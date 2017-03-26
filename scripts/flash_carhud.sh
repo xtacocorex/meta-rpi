@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export OETMP=~/projects/embeddedpi/carhud/build/tmp
+export OETMP=/home/build/carhud/build/tmp
 export MACHINE=raspberrypi
 
 if [ "x${1}" = "x" ]; then
