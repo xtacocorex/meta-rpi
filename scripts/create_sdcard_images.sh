@@ -14,7 +14,7 @@ if [ "x${2}" = "x" ]; then
 else
 	if [ "${2}" -eq 1 ]; then
 		CARDSIZE=1
-	if [ "${2}" -eq 2 ]; then
+	elif [ "${2}" -eq 2 ]; then
 		CARDSIZE=2
 	elif [ "${2}" -eq 4 ]; then
 		CARDSIZE=4
@@ -47,8 +47,8 @@ HOSTNAME=${MACH}
 
 SRCDIR=${OETMP}/deploy/images/${MACHINE}
 
-if [ ! -f "${SRCDIR}/${IMG_LONG}.tar.xz" ]; then
-	echo "File not found: ${SRCDIR}/${IMG_LONG}.tar.xz"
+if [ ! -f "${SRCDIR}/${IMG_LONG}.tar.bz2" ]; then
+	echo "File not found: ${SRCDIR}/${IMG_LONG}.tar.bz2"
 	exit 1
 fi
 
@@ -58,8 +58,8 @@ if [ -f "${DSTDIR}/${SDIMG}" ]; then
         rm ${DSTDIR}/${SDIMG}
 fi
 
-if [ -f "${DSTDIR}/${SDIMG}.xz" ]; then
-        rm -f ${DSTDIR}/${SDIMG}.xz*
+if [ -f "${DSTDIR}/${SDIMG}.bz2" ]; then
+        rm -f ${DSTDIR}/${SDIMG}.bz2*
 fi
 
 echo -e "\n***** Creating the loop device *****"
@@ -69,7 +69,7 @@ echo -e "\n***** Creating an empty SD image file *****"
 dd if=/dev/zero of=${DSTDIR}/${SDIMG} bs=1G count=${CARDSIZE}
 
 echo -e "\n***** Partitioning the SD image file *****"
-sudo fdisk ${DSTDIR}/${SDIMG} <<END
+sudo fdisk ${DSTDIR}/${SDIMG} <<EOF
 o
 n
 p
@@ -87,7 +87,7 @@ c
 a
 1
 w
-END
+EOF
 
 echo -e "\n***** Attaching to the loop device *****"
 sudo losetup -P ${LOOPDEV} ${DSTDIR}/${SDIMG}
