@@ -15,13 +15,17 @@ fi
 
 if [ "x${2}" = "x" ]; then
 	CARDSIZE=1
+	COUNT=900
 else
 	if [ "${2}" -eq 1 ]; then
 		CARDSIZE=1
+		COUNT=900
 	elif [ "${2}" -eq 2 ]; then
 		CARDSIZE=2
+		COUNT=1800
 	elif [ "${2}" -eq 4 ]; then
 		CARDSIZE=4
+		COUNT=3600
 	else
 		echo "Unsupported card size: ${2}"
 		exit 1
@@ -66,9 +70,10 @@ fi
 
 echo -e "\n***** Creating the loop device *****"
 LOOPDEV=`losetup -f`
+echo "LOOP DEVICE: $LOOPDEV"
 
 echo -e "\n***** Creating an empty SD image file *****"
-dd if=/dev/zero of=${DSTDIR}/${SDIMG} bs=1G count=${CARDSIZE}
+dd if=/dev/zero of=${DSTDIR}/${SDIMG} bs=1M count=${COUNT}
 
 echo -e "\n***** Partitioning the SD image file *****"
 sudo fdisk ${DSTDIR}/${SDIMG} <<EOF
@@ -96,6 +101,7 @@ sudo losetup -P ${LOOPDEV} ${DSTDIR}/${SDIMG}
 
 echo -e "\n***** Copying the boot partition *****"
 DEV=${LOOPDEV}p1
+echo "DEVICE: $DEV"
 ./copy_boot.sh ${DEV} 
 
 if [ $? -ne 0 ]; then
@@ -105,6 +111,7 @@ fi
 
 echo -e "\n***** Copying the rootfs *****"
 DEV=${LOOPDEV}p2
+echo "DEVICE: $DEV"
 ./copy_rootfs.sh ${DEV} ${IMG} ${HOSTNAME} 
 
 if [ $? -ne 0 ]; then
