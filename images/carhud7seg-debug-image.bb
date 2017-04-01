@@ -32,71 +32,12 @@ RPI_STUFF = " \
 
 # PYTHON 2.7
 CARHUD_PYTHON += "libpython2 \
-                  python-audio \
-                  python-bsddb \
-                  python-codecs \
-                  python-compile \
-                  python-compiler \
-                  python-compression \
                   python-core \
-                  python-crypt \
-                  python-ctypes \
-                  python-curses \
-                  python-datetime \
-                  python-db \
-                  python-debugger \
                   python-dev \
-                  python-difflib \
-                  python-distutils-staticdev \
-                  python-distutils \
-                  python-doctest \
-                  python-elementtree \
-                  python-email \
-                  python-fcntl \
-                  python-gdbm \
-                  python-hotshot \
-                  python-html \
-                  python-image \
-                  python-io \
-                  python-json \
-                  python-lang \
                   python-logging \
-                  python-mailbox \
-                  python-math \
-                  python-mime \
-                  python-mmap \
-                  python-multiprocessing \
-                  python-netclient \
-                  python-netserver \
-                  python-numbers \
-                  python-pickle \
-                  python-pkgutil \
-                  python-pprint \
-                  python-profile \
-                  python-pydoc \
                   python-re \
-                  python-readline \
-                  python-resource \
-                  python-robotparser \
-                  python-shell \
                   python-smbus \
-                  python-smtpd \
-                  python-stringold \
-                  python-subprocess \
-                  python-syslog \
-                  python-terminal \
-                  python-tests \
-                  python-textutils \
-                  python-threading \
-                  python-tkinter \
-                  python-unittest \
-                  python-unixadmin \
-                  python-xml \
-                  python-xmlrpc \
-                  python-zlib \
-                  python-modules \
-                  python-misc \
-                  python-man "
+                  python-subprocess"
 
 # ADAFRUIT RASPBERRY PI PYTHON LIBRARIES
 CARHUD_NEEDS = "adafruit-python-gpio \
