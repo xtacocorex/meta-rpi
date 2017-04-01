@@ -71,11 +71,22 @@ if [ ! -f ${SRCDIR}/Image ]; then
 	exit 1
 fi
 
-DEV=/dev/${1}1
+echo "ARGUMENT 1: ${1}"
+if [ -b ${1} ]; then
+	DEV=${1}
+	echo "DEVICE: $DEV"
+else
+	echo "NOT BLOCK DEVICE"
+	DEV=/dev/${1}1
 
-if [ ! -b ${DEV} ]; then
-	echo -e "\nBlock device not found: ${DEV}\n"
-	exit 1
+	if [ ! -b ${DEV} ]; then
+		DEV=/dev/${1}p1
+
+		if [ ! -b ${DEV} ]; then
+			echo "Block device not found: /dev/${1}1 or /dev/${1}p1"
+			exit 1
+		fi
+	fi
 fi
 
 echo "Formatting FAT partition on ${DEV}"
@@ -111,8 +122,8 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 
-echo "Renaming overlay dtbs"
-sudo rename -e 's/Image-//' /media/card/overlays/*.dtb
+echo "Renaming overlay dtbs to dtbos"
+sudo rename 's/Image-([\w\-]+)-overlay.dtb/$1.dtbo/' /media/card/overlays/*.dtb
 
 echo "Copying dtbs"
 for f in ${DTBS}; do
@@ -149,8 +160,18 @@ if [ -f ./config.txt ]; then
 	fi
 fi
   
+if [ -f ./cmdline.txt ]; then
+	echo "Copying local cmdline.txt to card"
+	sudo cp ./cmdline.txt /media/card
+
+	if [ $? -ne 0 ]; then
+		echo "Error copying local cmdline.txt to card"
+		sudo umount ${DEV}
+		exit 1
+	fi
+fi
+
 echo "Unmounting ${DEV}"
 sudo umount ${DEV}
 
 echo "Done"
-

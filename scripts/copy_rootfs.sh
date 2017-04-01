@@ -57,11 +57,19 @@ if [ ! -f "${SRCDIR}/${IMAGE}-image-${MACHINE}.tar.bz2" ]; then
         exit 1
 fi
 
-DEV=/dev/${1}2
+if [ -b ${1} ]; then
+	DEV=${1}
+else
+	DEV=/dev/${1}2
 
-if [ ! -b $DEV ]; then
-	echo "Block device $DEV does not exist"
-	exit 1
+	if [ ! -b $DEV ]; then
+		DEV=/dev/${1}p2
+
+		if [ ! -b $DEV ]; then
+			echo "Block device not found: /dev/${1}2 or /dev/${1}p2"
+			exit 1
+		fi
+	fi
 fi
 
 echo "Formatting ${DEV} as ext4"
@@ -71,9 +79,9 @@ echo "Mounting ${DEV}"
 sudo mount ${DEV} /media/card
 
 echo "Extracting ${IMAGE}-image-${MACHINE}.tar.bz2 to /media/card"
-sudo tar -C /media/card -xjf ${SRCDIR}/${IMAGE}-image-${MACHINE}.tar.bz2
+sudo tar --numeric-owner -C /media/card -xjf ${SRCDIR}/${IMAGE}-image-${MACHINE}.tar.bz2
 
-echo "Writing hostname to /etc/hostname"
+echo "Writing ${TARGET_HOSTNAME} to /etc/hostname"
 export TARGET_HOSTNAME
 sudo -E bash -c 'echo ${TARGET_HOSTNAME} > /media/card/etc/hostname'        
 

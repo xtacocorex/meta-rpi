@@ -1,13 +1,17 @@
 #!/bin/bash
 
+export MACHINE=raspberrypi
+
 DSTDIR=/home/build/shared/
 IMG=${1}
 IMG_LONG="${IMG}-image-${MACHINE}"
+export OETMP=/home/build/carhud/build/tmp
+HOSTNAME=carhud
 
-#if [ ! -d /media/card ]; then
-#        echo "Temporary mount point [/media/card] not found"
-#        exit 1
-#fi
+if [ ! -d /media/card ]; then
+        echo "Temporary mount point [/media/card] not found"
+        exit 1
+fi
 
 if [ "x${2}" = "x" ]; then
 	CARDSIZE=1
@@ -42,8 +46,6 @@ else
 	echo "Invalid MACHINE: ${MACHINE}"
 	exit 1
 fi
-
-HOSTNAME=${MACH}
 
 SRCDIR=${OETMP}/deploy/images/${MACHINE}
 
